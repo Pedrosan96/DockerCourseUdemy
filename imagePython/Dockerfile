@@ -17,16 +17,19 @@ COPY index.html .
 COPY app.log /datos
 
 ##ADD## La diferencia con COPY es que puede copiar ficheros .tar o de un url
-ADD docs docs  ## crea el directorio docs a partir de datos1(WORKDIR)
+#crea el directorio docs a partir de /datos1 (WORKDIR)
+ADD docs docs 
 ADD f* /datos/
-ADD f.tar .  ##Descomprime el f.tar (archivo que no he creado pero deberia existir)
+ADD f.tar . 
+ ##Descomprime el f.tar (archivo que no he creado pero deberia existir)
 
 ##ENV##
 ENV dir=/data dir1=/data1
 RUN mkdir $dir && mkdir $dir1
 
 ##ARG## A diferencia de ENV, permite crear el espacio al construir la imagen 
-ARG dir2	##Ej. docker build -t image:v6 --build-arg dir2=/data2 .
+ARG dir2	
+##Ej. docker build -t image:v6 --build-arg dir2=/data2 .
 RUN mkdir $dir2 
 
 ##ENTRYPOINT##
