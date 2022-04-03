@@ -31,6 +31,12 @@ RUN mkdir $dir && mkdir $dir1
 ARG dir2	
 ##Ej. docker build -t image:v6 --build-arg dir2=/data2 .
 RUN mkdir $dir2 
+ARG user
+ENV user_docker $user
+ADD add_user.sh /datos1
+RUN /datos1/add_user.sh
+#Nuevo usuario creado desde script add_user.sh
+##Ej. docker build -t image:v6 --build-arg dir2=/datos2 --build-arg user=tom .
 
 ##ENTRYPOINT##
 ENTRYPOINT ["/bin/bash"]
